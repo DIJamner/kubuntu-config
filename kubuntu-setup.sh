@@ -34,11 +34,29 @@ waitforuser () {
 # Setup Steps #
 ###############
 
+# the entry point of the script
+main () {
+    sudo apt update
+    sudo apt upgrade
+    git
+    kde
+    applications
+}
+
+git () {
+    sudo apt install git
+}
+
+# Set up desktop environment and default apps
+kde () {
+    darkmode
+    kate-dracula
+    # TODO: put in place/run plasma scripts to set up desktop
+}
+
 # switch KDE to dark mode
 darkmode () {
     lookandfeeltool --apply org.kde.breezedark.desktop
-    # Kate dark mode via Dracula
-    katedracula
 }
 
 # install the dracula color scheme for Kate
@@ -55,27 +73,12 @@ kate-dracula () {
     rm dracula.kateschema
 }
 
-# Set up desktop environment and default apps
-kde () {
-    darkmode
-    # TODO: put in place/run plasma scripts to set up desktop
-}
-
-git () {
-    sudo apt install git
-}
-
-# install and start dropbox
-dropbox () {
-    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-    wget "https://www.dropbox.com/packages/dropbox.py"
-    chmod +x dropbox.py
-    sudo mv dropbox.py /usr/local/bin/dropbox
-    dropbox autostart y
-    dropbox start
-    # USER INPUT
-    echo "Log in to dropbox via the browser window"
-    waitforuser
+applications () {
+    keepassxc
+    dropbox
+    simplenote
+    skype
+    # TODO: backups
 }
 
 # install keepassxc and configure with password database and settings
@@ -108,6 +111,19 @@ keepassxc () {
     #TODO: add browser extension?
 }
 
+# install and start dropbox
+dropbox () {
+    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+    wget "https://www.dropbox.com/packages/dropbox.py"
+    chmod +x dropbox.py
+    sudo mv dropbox.py /usr/local/bin/dropbox
+    dropbox autostart y
+    dropbox start
+    # USER INPUT
+    echo "Log in to dropbox via the browser window"
+    waitforuser
+}
+
 # install simplenote
 simplenote () {
     sudo snap install simplenote
@@ -125,23 +141,6 @@ skype () {
     echo "Navigate to Settings -> General -> Theme. Select Dark."
     waitforuser
 
-}
-
-applications () {
-    keepassxc
-    dropbox
-    simplenote
-    skype
-    # TODO: backups
-}
-
-# the entry point of the script
-main () {
-    sudo apt update
-    sudo apt upgrade
-    git
-    kde
-    applications
 }
 
 main
