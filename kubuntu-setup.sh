@@ -12,8 +12,15 @@ my_dir="$(dirname '$(readlink -f "$0")')"
 # to make sure relative filepaths passed as arguments are handled correctly
 run_loc="$(pwd)"
 
-# Constants
+#############
+# Constants #
+#############
+
 password_loc="~/Passwords.kdbx"
+
+#####################
+# Utility Functions #
+#####################
 
 # helper routine to wait for user input
 # used when configuration must be done manually
@@ -21,19 +28,21 @@ waitforuser () {
     read -p "Press any key to continue... " -n 1 -s
 }
 
+# TODO: assert-set
+
+###############
+# Setup Steps #
+###############
+
 # switch KDE to dark mode
 darkmode () {
     lookandfeeltool --apply org.kde.breezedark.desktop
     # Kate dark mode via Dracula
     katedracula
-    # kwriteconfig5 --file katerc \
-    #     --group "KTextEditor Renderer" \
-    #     --key Schema \
-    #     "Breeze Dark"
 }
 
 # install the dracula color scheme for Kate
-katedracula () {
+kate-dracula () {
     pushd ~/Downloads
     git clone https://github.com/dracula/kate.git
     mv ./kate/dracula.kateschema dracula.kateschema
@@ -123,10 +132,10 @@ applications () {
     dropbox
     simplenote
     skype
-    sublime
+    # TODO: backups
 }
 
-# the 
+# the entry point of the script
 main () {
     sudo apt update
     sudo apt upgrade
