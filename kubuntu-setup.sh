@@ -16,7 +16,11 @@ run_loc="$(pwd)"
 # Constants #
 #############
 
+# Preferences
 password_loc="~/Passwords.kdbx"
+
+# System constants
+kblayout="--file kxkbrc --group Layout"
 
 #####################
 # Utility Functions #
@@ -28,6 +32,12 @@ waitforuser () {
     read -p "Press any key to continue... " -n 1 -s
 }
 
+# helper for appending to a key in a configuration file
+kappendconfig5 () {
+    local currentval=$(kreadconfig5 $1)
+    kwriteconfig5 $1 currentval,$2
+}
+
 # TODO: assert-set
 
 ###############
@@ -36,11 +46,31 @@ waitforuser () {
 
 # the entry point of the script
 main () {
+    # TODO: make the right things autostart
     sudo apt update
     sudo apt upgrade
+    keyboard
     git
     kde
     applications
+}
+
+keyboard () {
+    #TODO set up keybindings, ability to switch to greek easily
+    # https://manpages.debian.org/testing/keyboard-configuration/keyboard.5.en.html
+    add-greek
+    set-caps-lock-switch
+    #keybindings made of alternate layout + alternate shortcuts (maybe?)
+}
+
+# adds the greek keyboard layout to the existing layouts
+add-greek () {
+    kappendconfig5 "$kblayout --key LayoutList" gr
+}
+
+# sets caps lock to switch between keyboards
+set-caps-lock-switch () {
+    kappendconfig5 "$kblayout --key Options" grp:caps_toggle
 }
 
 git () {
