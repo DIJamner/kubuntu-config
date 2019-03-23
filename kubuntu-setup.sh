@@ -21,6 +21,7 @@ password_loc="~/Passwords.kdbx"
 
 # System constants
 kblayout="--file kxkbrc --group Layout"
+kblayout_opts="$kblayout --key Options"
 
 #####################
 # Utility Functions #
@@ -60,6 +61,7 @@ keyboard () {
     # https://manpages.debian.org/testing/keyboard-configuration/keyboard.5.en.html
     add-greek
     set-caps-lock-switch
+    swap-left-ctrl-cmd
     #keybindings made of alternate layout + alternate shortcuts (maybe?)
 }
 
@@ -70,7 +72,11 @@ add-greek () {
 
 # sets caps lock to switch between keyboards
 set-caps-lock-switch () {
-    kappendconfig5 "$kblayout --key Options" grp:caps_toggle
+    kappendconfig5 $kblayout_opts grp:caps_toggle
+}
+
+swap-left-ctrl-cmd () {
+    kappendconfig5 $kblayout_opts ctrl:swap_lwin_ctrl
 }
 
 git () {
