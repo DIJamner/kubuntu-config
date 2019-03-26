@@ -1,0 +1,16 @@
+#! /bin/bash
+
+# ARGUMENTS
+# 1: program to install
+# 2: post-install setup script
+
+
+dpkg -l | grep -q $1
+if [ $? -eq 1 ]
+then
+    sudo apt install $1
+    $2
+else
+    echo "$1 already installed, skipping ..."
+fi
+

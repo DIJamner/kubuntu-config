@@ -48,7 +48,6 @@ kappendconfig5 () {
 
 
 applications () {
-    #keepassxc
     #dropbox
     for script in $my_dir/applications/*.sh
     do
@@ -61,7 +60,9 @@ applications () {
 # install keepassxc and configure with password database and settings
 # should be done early to make passwords available to user
 # REQUIRED VARS: PASSWORDS
+# TODO: move to separate scipt and test
 keepassxc () {
+    # TODO:use `dpkg -l | grep -q $n` to check if package is installed
     sudo apt install keepassxc
     # copy over password database
     cd $run_loc
@@ -90,6 +91,7 @@ keepassxc () {
 }
 
 # install and start dropbox
+# TODO: move to separate script and test
 dropbox () {
     cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
     # TODO: wget doesn't give the right file the right name
