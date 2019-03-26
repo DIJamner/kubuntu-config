@@ -100,7 +100,7 @@ dropbox () {
     dropbox start
     # USER INPUT
     echo "Log in to dropbox via the browser window"
-    waitforuser
+    $my_dir/../waitforuser
 }
 
 applications        

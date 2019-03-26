@@ -16,7 +16,7 @@ then
     # USER INPUT
     echo "Log in to simplenote"
     echo "Press Cmd+, for preferences -> Display -> Theme. Select Dark."
-    $my_dir/../waitforuser
+    $my_dir/../utils/waitforuser
 else
     $my_dir/../utils/snapinstall simplenote "$0 setup"
 fi

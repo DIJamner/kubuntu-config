@@ -15,7 +15,7 @@ then
     skype
     echo 'Log into Skype'
     echo 'Navigate to Tools -> Settings -> General -> Theme. Select Dark.'
-    $my_dir/../waitforuser
+    $my_dir/../utils/waitforuser
 else
     $my_dir/../utils/snapinstall skype "$0 setup" --classic
 fi
