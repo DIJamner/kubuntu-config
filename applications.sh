@@ -1,8 +1,5 @@
 #! /bin/bash
 
-#kwriteconfig5 for writing settings
-# TODO: add checks for installation
-# TODO: configure key bindings
 # TODO: mail client
 
 # Script location
@@ -11,35 +8,6 @@ my_dir="$(dirname "$(realpath -s $0)")"
 # Script run location
 # to make sure relative filepaths passed as arguments are handled correctly
 run_loc="$(pwd)"
-
-#############
-# Constants #
-#############
-
-# Preferences
-password_loc="~/Passwords.kdbx"
-
-# System constants
-kblayout="--file kxkbrc --group Layout"
-kblayout_opts="$kblayout --key Options"
-
-#####################
-# Utility Functions #
-#####################
-
-# helper routine to wait for user input
-# used when configuration must be done manually
-waitforuser () {
-    read -p "Press any key to continue... " -n 1 -s
-}
-
-# helper for appending to a key in a configuration file
-kappendconfig5 () {
-    local currentval=$(kreadconfig5 $1)
-    kwriteconfig5 $1 currentval,$2
-}
-
-# TODO: assert-set
 
 ###############
 # Setup Steps #
@@ -55,39 +23,6 @@ applications () {
         "$script"
     done
     # TODO: backups
-}
-
-# install keepassxc and configure with password database and settings
-# should be done early to make passwords available to user
-# REQUIRED VARS: PASSWORDS
-# TODO: move to separate scipt and test
-keepassxc () {
-    # TODO:use `dpkg -l | grep -q $n` to check if package is installed
-    sudo apt install keepassxc
-    # copy over password database
-    cd $run_loc
-    # TODO: do these work if the application has never been opened?
-    #cp $PASSWORDS $password_loc
-    # configure keepass settings
-    kwriteconfig5 --file keepassxc/keepassxc.ini \
-        --group security \
-        --key lockdatabaseminimize \
-        --type bool \
-        true 
-    kwriteconfig5 --file keepassxc/keepassxc.ini \
-        --group security \
-        --key lockdatabaseidle \
-        --type bool \
-        true 
-    kwriteconfig5 --file keepassxc/keepassxc.ini \
-        --group security \
-        --key lockdatabaseidlesec \
-        60 
-    kwriteconfig5 --file keepassxc/keepassxc.ini \
-        --group General \
-        --key LastOpenedDatabases \
-        $password_loc
-    #TODO: add browser extension?
 }
 
 # install and start dropbox
