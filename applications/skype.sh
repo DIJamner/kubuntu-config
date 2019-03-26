@@ -12,12 +12,12 @@ run_loc="$(pwd)"
 
 if [ "$1" = "setup" ]
 then
-    simplenote &
-    # USER INPUT
-    echo "Log in to simplenote"
-    echo "Press Cmd+, for preferences -> Display -> Theme. Select Dark."
-    $my_dir/waitforuser
+    skype
+    echo 'Log into Skype'
+    echo 'Navigate to Tools -> Settings -> General -> Theme. Select Dark.'
+    $my_dir/../waitforuser
 else
-    $my_dir/utils/snapinstall simplenote "$0 setup"
+    $my_dir/../utils/snapinstall skype "$0 setup" --classic
 fi
+
 

@@ -1,11 +1,17 @@
 #! /bin/bash
 
 # checks whether the given application has already been installed by snap
+# ARGUMENTS:
+# $1 the snap to install
+# $2 the setup script to run after install
+# $3 [optional] any extra flags for snap
+
+
 snap list | grep -q $1
 if [ $? -eq 1 ]
 then
     # install application
-    sudo snap install $1
+    sudo snap install $1 $3
     $2
 else
     echo "$1 already installed, skipping... "

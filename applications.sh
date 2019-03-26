@@ -51,7 +51,7 @@ applications () {
     keepassxc
     dropbox
     $my_dir/applications/simplenote.sh
-    skype
+    $my_dir/applications/skype.sh
     latex
     # TODO: backups
 }
@@ -99,15 +99,6 @@ dropbox () {
     # USER INPUT
     echo "Log in to dropbox via the browser window"
     waitforuser
-}
-
-skype () {
-    sudo snap install skype --classic
-    skype
-    echo "Log into Skype"
-    echo "Navigate to Settings -> General -> Theme. Select Dark."
-    waitforuser
-
 }
 
 latex () {
