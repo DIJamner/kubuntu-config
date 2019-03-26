@@ -4,7 +4,7 @@
 # 1 [optional] if this argument is "setup" then just perform setup
 
 # Script location
-my_dir="$(dirname '$(readlink -f "$0")')"
+my_dir="$(dirname "$(realpath -s $0)")"
 
 # Script run location
 # to make sure relative filepaths passed as arguments are handled correctly

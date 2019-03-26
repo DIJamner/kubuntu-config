@@ -6,7 +6,7 @@
 # TODO: mail client
 
 # Script location
-my_dir="$(dirname '$(readlink -f "$0")')"
+my_dir="$(dirname "$(realpath -s $0)")"
 
 # Script run location
 # to make sure relative filepaths passed as arguments are handled correctly
@@ -48,11 +48,13 @@ kappendconfig5 () {
 
 
 applications () {
-    keepassxc
-    dropbox
-    $my_dir/applications/simplenote.sh
-    $my_dir/applications/skype.sh
-    latex
+    #keepassxc
+    #dropbox
+    for script in $my_dir/applications/*.sh
+    do
+        # TODO: make it work when the scripts are run from here
+        "$script"
+    done
     # TODO: backups
 }
 
@@ -99,10 +101,6 @@ dropbox () {
     # USER INPUT
     echo "Log in to dropbox via the browser window"
     waitforuser
-}
-
-latex () {
-    sudo apt install texlive-full texstudo
 }
 
 applications        
