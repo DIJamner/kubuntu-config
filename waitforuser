@@ -1,0 +1,8 @@
+#! /bin/bash
+
+# helper routine to wait for user input
+# used when configuration must be done manually
+
+read -p "Press return to continue... " -r
+
+

@@ -27,11 +27,6 @@ kblayout_opts="$kblayout --key Options"
 # Utility Functions #
 #####################
 
-# helper routine to wait for user input
-# used when configuration must be done manually
-waitforuser () {
-    read -p "Press any key to continue... " -n 1 -s
-}
 
 # helper for appending to a key in a configuration file
 kappendconfig5 () {
@@ -68,7 +63,7 @@ kate-dracula () {
     # USER INPUT
     echo "Go to Settings -> Configure Kate -> Fonts and Colors -> Import."
     echo "Select ~/Downloads/dracula.kateschema. Import as new schema and apply."
-    waitforuser
+    $my_dir/waitforuser
     rm dracula.kateschema
 }
 

@@ -1,0 +1,12 @@
+#! /bin/bash
+
+# checks whether the given application has already been installed by snap
+snap list | grep -q $1
+if [ $? -eq 1 ]
+then
+    # install application
+    sudo snap install $1
+    $2
+else
+    echo "$1 already installed, skipping... "
+fi

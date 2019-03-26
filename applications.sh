@@ -50,7 +50,7 @@ kappendconfig5 () {
 applications () {
     keepassxc
     dropbox
-    simplenote
+    $my_dir/applications/simplenote.sh
     skype
     latex
     # TODO: backups
@@ -63,6 +63,7 @@ keepassxc () {
     sudo apt install keepassxc
     # copy over password database
     cd $run_loc
+    # TODO: do these work if the application has never been opened?
     #cp $PASSWORDS $password_loc
     # configure keepass settings
     kwriteconfig5 --file keepassxc/keepassxc.ini \
@@ -97,16 +98,6 @@ dropbox () {
     dropbox start
     # USER INPUT
     echo "Log in to dropbox via the browser window"
-    waitforuser
-}
-
-# install simplenote
-simplenote () {
-    sudo snap install simplenote
-    simplenote &
-    # USER INPUT
-    echo "Log in to simplenote"
-    echo "Press Cmd+, for preferences -> Display -> Theme. Select Dark."
     waitforuser
 }
 

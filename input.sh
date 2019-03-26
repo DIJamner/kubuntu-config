@@ -28,12 +28,6 @@ us_file="symbols/us"
 # Utility Functions #
 #####################
 
-# helper routine to wait for user input
-# used when configuration must be done manually
-waitforuser () {
-    read -p "Press any key to continue... " -n 1 -s
-}
-
 # helper for appending to a key in a configuration file
 kappendconfig5 () {
     local currentval=$(kreadconfig5 $1)
@@ -63,7 +57,7 @@ keyboard () {
     # swaps ctrl and alt for both left and right
     # TODO: set permanently instead of just for session
     setxkbmap -layout us,gr -variant dustin, -option -option "ctrl:swap_ralt_rctl,ctrl:swap_lalt_lctl,grp:caps_toggle"
-    #TODO: Ctrl-tab for switching programs
+    # TODO: Ctrl-tab for switching programs (swap with alt-tab?)
     #TODO: Ctrl ~ for switching widnows
     #TODO: consider using caps-lock for one of above
     #keybindings made of alternate layout + alternate shortcuts (maybe?)
