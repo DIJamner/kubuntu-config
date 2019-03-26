@@ -45,84 +45,14 @@ kappendconfig5 () {
 # Setup Steps #
 ###############
 
-# the entry point of the script
-main () {
-    # TODO: make the right things autostart
-    sudo apt update
-    sudo apt upgrade
-    keyboard
-    git
-    kde
-    applications
-}
 
-keyboard () {
-    #TODO set up keybindings, ability to switch to greek easily
-    # https://manpages.debian.org/testing/keyboard-configuration/keyboard.5.en.html
-    add-greek
-    set-caps-lock-switch
-    swap-left-ctrl-cmd
-    #TODO: Ctrl-tab for switching programs
-    #TODO: Ctrl ~ for switching widnows
-    #TODO: consider using caps-lock for one of above
-    #keybindings made of alternate layout + alternate shortcuts (maybe?)
-}
-
-# adds the greek keyboard layout to the existing layouts
-add-greek () {
-    kappendconfig5 "$kblayout --key LayoutList" gr
-}
-
-# sets caps lock to switch between keyboards
-set-caps-lock-switch () {
-    # should be equivalent to:
-    # setxkbmap -option grp:caps_toggle
-    #TODO: which to use?
-    kappendconfig5 $kblayout_opts grp:caps_toggle
-}
-
-swap-left-ctrl-cmd () {
-    # should be equivalent to:
-    # setxkbmap -option ctrl:swap_lwin_lctl
-    #TODO: which to use?
-    kappendconfig5 $kblayout_opts ctrl:swap_lwin_ctrl
-}
-
-git () {
-    sudo apt install git
-}
-
-# Set up desktop environment and default apps
-kde () {
-    darkmode
-    kate-dracula
-    # TODO: put in place/run plasma scripts to set up desktop
-}
-
-# switch KDE to dark mode
-darkmode () {
-    lookandfeeltool --apply org.kde.breezedark.desktop
-}
-
-# install the dracula color scheme for Kate
-kate-dracula () {
-    pushd ~/Downloads
-    git clone https://github.com/dracula/kate.git
-    mv ./kate/dracula.kateschema dracula.kateschema
-    rm -rf ./kate
-    kate &
-    # USER INPUT
-    echo "Go to Settings -> Configure Kate -> Fonts and Colors -> Import."
-    echo "Select ~/Downloads/dracula.kateschema. Import as new schema and apply."
-    waitforuser
-    rm dracula.kateschema
-}
 
 applications () {
     keepassxc
     dropbox
     simplenote
     skype
+    latex
     # TODO: backups
 }
 
@@ -133,7 +63,7 @@ keepassxc () {
     sudo apt install keepassxc
     # copy over password database
     cd $run_loc
-    cp $PASSWORDS $password_loc
+    #cp $PASSWORDS $password_loc
     # configure keepass settings
     kwriteconfig5 --file keepassxc/keepassxc.ini \
         --group security \
@@ -159,7 +89,8 @@ keepassxc () {
 # install and start dropbox
 dropbox () {
     cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-    wget "https://www.dropbox.com/packages/dropbox.py"
+    # TODO: wget doesn't give the right file the right name
+    wget "https://www.dropbox.com/download?dl=packages/dropbox.py" -o dropbox.py
     chmod +x dropbox.py
     sudo mv dropbox.py /usr/local/bin/dropbox
     dropbox autostart y
@@ -188,7 +119,11 @@ skype () {
 
 }
 
-main
+latex () {
+    sudo apt install texlive-full texstudo
+}
+
+applications        
 
 
 
