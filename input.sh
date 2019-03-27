@@ -23,6 +23,8 @@ password_loc="~/Passwords.kdbx"
 xkb="/usr/share/X11/xkb"
 ctrl_file="symbols/ctrl"
 us_file="symbols/us"
+evdev="rules/evdev"
+evdevxml="rules/evdev.xml"
 
 #####################
 # Utility Functions #
@@ -40,6 +42,28 @@ kappendconfig5 () {
 # Setup Steps #
 ###############
 
+list-rswap-evdev () {
+    grep -q swap_ralt_rctl "$xkb/$evdev"
+    if [ $? -eq 1 ]
+    then
+        echo "Listing swap_ralt_rctl in $xkb/$evdev..."
+        sudo sed -i "/^\s*ctrl:swap_lalt_lctl\s*=/r $my_dir/xkb/$evdev" "$xkb/$evdev"
+    else
+        echo "swap_ralt_rctl found in $xkb/$evdev, skipping...."
+    fi
+}
+
+# TODO: necessary? if so, fix
+list-rswap-evdev-xml () {
+    grep -q swap_ralt_rctl "$xkb/$evdevxml"
+    if [ $? -eq 1 ]
+    then
+        echo "Listing swap_ralt_rctl in $xkb/$evdevxml..."
+        sed "/^$/r $my_dir/xkb/$evdevxml" "$xkb/$evdevxml"
+    else
+        echo "swap_ralt_rctl found in $xkb/$evdevxml, skipping...."
+    fi
+}
 
 keyboard () {
     #TODO set up keybindings, ability to switch to greek easily
@@ -48,9 +72,13 @@ keyboard () {
     #set-caps-lock-switch
     #swap-left-ctrl-alt
     
-    # TODO: write data to basic/evdev files to register layouts
-    append-if-not-present "$my_dir/xkb/$ctrl_file" "$xkcb/$ctrl_file"
-    append-if-not-present "$my_dir/xkb/$us_file" "$xkcb/$us_file"
+    # TODO: write data to basic/evdev files to register layout variant
+    
+    list-rswap-evdev
+    #list-rswap-evdev-xml
+    
+    append-if-not-present "$my_dir/xkb/$ctrl_file" "$xkb/$ctrl_file"
+    append-if-not-present "$my_dir/xkb/$us_file" "$xkb/$us_file"
     # sets two layouts: us(dustin) and greek
     # resets all options
     # sets caps lock to switch between layouts
@@ -76,37 +104,17 @@ append-if-not-present () {
         echo "Found $1 in file $2. Skipping..."
     else
         echo "Did not find $1 in file $2. Appending to end of file..."
-        cat $1 > $2
+        # TODO: permission denied
+        cat $1 | sudo tee -a $2 > /dev/null
     fi
-
-}
-
-# adds the greek keyboard layout to the existing layouts
-add-greek () {
-    kappendconfig5 "$kblayout --key LayoutList" gr
-}
-
-# sets caps lock to switch between keyboards
-set-caps-lock-switch () {
-    # should be equivalent to:
-    # setxkbmap -option grp:caps_toggle
-    #TODO: which to use?
-    kappendconfig5 "$kblayout_opts" grp:caps_toggle
-}
-
-swap-left-ctrl-alt () {
-    # should be equivalent to:
-    # setxkbmap -option ctrl:swap_lwin_lctl
-    #TODO: which to use?
-    kappendconfig5 "$kblayout_opts" ctrl:swap_lalt_lctl
 }
 
 trackpad () {
-        
+    echo "TODO: implement trackpad settings"
 }
 
 
-#keyboard
+keyboard
 trackpad
 
 
