@@ -5,6 +5,8 @@
 
 # Script location
 my_dir="$(dirname "$(realpath -s $0)")"
+#exit after an error
+set -e
 
 # Script run location
 # to make sure relative filepaths passed as arguments are handled correctly

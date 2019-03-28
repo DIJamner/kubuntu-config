@@ -1,5 +1,8 @@
 #! /bin/bash
 
+#exit after an error
+set -e
+
 my_dir="$(dirname "$(realpath -s $0)")"
 
 #installs the ful tex distribution

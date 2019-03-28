@@ -3,6 +3,9 @@
 # ARGUMENTS
 # 1 [optional] if this argument is "setup" then just perform setup
 
+#exit after an error
+set -e
+
 # Script location
 my_dir="$(dirname "$(realpath -s $0)")"
 

@@ -1,9 +1,9 @@
 #! /bin/bash
 
-#kwriteconfig5 for writing settings
-# TODO: add checks for installation
 # TODO: configure key bindings
-# TODO: mail client
+
+#exit after an error
+set -e
 
 # Script location
 my_dir="$(dirname "$(realpath -s $0)")"

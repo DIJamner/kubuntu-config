@@ -1,5 +1,9 @@
 #! /bin/bash
 
+
+#exit after an error
+set -e
+
 # Script location
 my_dir="$(dirname "$(realpath -s $0)")"
 
