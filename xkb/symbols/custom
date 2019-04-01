@@ -1,0 +1,21 @@
+
+// TODO: get shift+alt + tab working
+//      details: left shift + right alt(shift key) doesn't work
+// TODO: rename (do as part of write update)
+// Swap the functions of the right Alt ke, rigth shift key and the right Ctrl key.
+partial modifier_keys
+xkb_symbols "swap_ralt_rctl_rshift" {
+    replace key <RALT> { [ Control_R, Control_R ] };
+    replace key <RTSH> { [ Alt_R, Meta_R ] };
+    replace key <RCTL> { [ Shift_R ] };
+    modifier_map Mod1    { <RTSH> };
+    modifier_map Control { <RALT> };
+};
+
+
+// move the down arrow on the numberpad up between the left and right
+partial alphanumeric_keys
+xkb_symbols "numpad_arrow_tri" {
+    key <KP2> { [ KP_Begin,       KP_2 ]};
+    key <KP5> { [ KP_Down,        KP_5 ]};
+};

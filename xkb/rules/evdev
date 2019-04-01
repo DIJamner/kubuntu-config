@@ -1,1 +1,5 @@
-  ctrl:swap_ralt_rctl	=	+ctrl(swap_ralt_rctl)
+// BEGIN Dustin's layout    
+! option    =   symbols
+  custom:swap_ralt_rctl_rshift = +custom(swap_ralt_rctl_rshift)
+  custom:numpad_arrow_tri = +custom(numpad_arrow_tri)
+// END Dustin's layout
