@@ -16,6 +16,10 @@ xkb_symbols "swap_ralt_rctl_rshift" {
 // move the down arrow on the numberpad up between the left and right
 partial alphanumeric_keys
 xkb_symbols "numpad_arrow_tri" {
+    // TODO: disconnect shift from numlock to have more effective keys
     key <KP2> { [ KP_Begin,       KP_2 ]};
-    key <KP5> { [ KP_Down,        KP_5 ]};
+    key <KP4> { [ KP_Left,        KP_Left ]};
+    key <KP5> { [ KP_Down,        KP_Down ]};
+    key <KP6> { [ KP_Right,       KP_Right ]};
+    key <KP8> { [ KP_Up,        KP_Up ]};
 };
