@@ -7,5 +7,5 @@ my_dir="$(dirname "$(realpath -s $0)")"
 # to make sure relative filepaths passed as arguments are handled correctly
 run_loc="$(pwd)"
 
-$my_dir/../utils/aptinstall whois
+sudo apt install thunderbird
 

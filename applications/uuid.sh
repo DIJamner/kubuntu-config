@@ -7,5 +7,14 @@ my_dir="$(dirname "$(realpath -s $0)")"
 # to make sure relative filepaths passed as arguments are handled correctly
 run_loc="$(pwd)"
 
-$my_dir/../utils/aptinstall whois
+
+# import fn tools
+source "$my_dir/../utils/fn.sh"
+
+uuid-install () {
+    echo "Calling setup!"
+
+}
+
+$my_dir/../utils/aptinstall uuid $(pass uuid-install)
 
