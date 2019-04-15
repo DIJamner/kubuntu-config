@@ -15,7 +15,8 @@ run_loc="$(pwd)"
 #############
 
 # Preferences
-targets="/home/dustin/backup_targets.txt"
+targets="backup_targets.txt"
 
+cd ~
 # TODO: delete old files
 rsync -arRv --files-from="$targets" ~ ~/Vaults/Backups/current
