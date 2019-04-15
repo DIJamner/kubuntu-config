@@ -16,7 +16,8 @@ run_loc="$(pwd)"
 
 # Preferences
 targets="backup_targets.txt"
+backup_loc="Vaults/Backups"
 
 cd ~
 # TODO: delete old files
-rsync -arRv --files-from="$targets" ~ ~/Vaults/Backups/current
+rsync -arRvb --backup-dir="../old" --files-from="$targets" ~ "$backup_loc/current"
