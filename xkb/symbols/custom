@@ -12,14 +12,24 @@ xkb_symbols "swap_ralt_rctl_rshift" {
     modifier_map Control { <RALT> };
 };
 
-
 // move the down arrow on the numberpad up between the left and right
 partial alphanumeric_keys
 xkb_symbols "numpad_arrow_tri" {
+
+    //include "custom(numpad_arrows)";
+    
     // TODO: disconnect shift from numlock to have more effective keys
-    key <KP2> { [ KP_Begin,       KP_2 ]};
-    key <KP4> { [ KP_Left,        KP_Left ]};
-    key <KP5> { [ KP_Down,        KP_Down ]};
-    key <KP6> { [ KP_Right,       KP_Right ]};
-    key <KP8> { [ KP_Up,        KP_Up ]};
+    key <KP4> { type[Group1]="TWO_LEVEL",
+                [ Left,        KP_Left ]};
+    key <KP5> { type[Group1]="TWO_LEVEL",
+                [ Down,        KP_Down ]};
+    key <KP6> { type[Group1]="TWO_LEVEL",
+                [ Right,       KP_Right ]};
+    key <KP8> { type[Group1]="TWO_LEVEL",
+                [ Up,        KP_Up ]};
+    
+    key <KP1> { [ KP_1, KP_End ]};
+    key <KP2> { [ KP_2, KP_Begin ]};
+    key <KP3> { [ KP_3, KP_Next ]};
+    
 };
