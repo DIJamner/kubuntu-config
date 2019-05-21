@@ -18,6 +18,19 @@ run_loc="$(pwd)"
 targets="backup_targets.txt"
 backup_loc="Vaults/Backups"
 
+function do-backup () {
+    rsync -arRvb --backup-dir="../old" --files-from="$targets" ~ "$backup_loc/current"
+}
+
 cd ~
-# TODO: delete old files
-rsync -arRvb --backup-dir="../old" --files-from="$targets" ~ "$backup_loc/current"
+
+# check that backups exist
+if [ -e "$backup_loc/current" ]
+then
+    do-backup
+elif [ "$1" = "--new" ]
+then
+    do-backup
+else 
+    echo "No backup found. Use '--new' to create a new backup"
+fi
