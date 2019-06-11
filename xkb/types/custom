@@ -1,0 +1,7 @@
+partial xkb_types "numpad_arrows" {
+    type "NUMPAD_ARR" {
+        modifiers = Shift;
+        map[None] = Level1;
+        map[Shift] = Level2;
+    };
+};

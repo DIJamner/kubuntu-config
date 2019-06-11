@@ -20,7 +20,8 @@ password_loc="~/Passwords.kdbx"
 xkb="/usr/share/X11/xkb"
 ctrl_file="symbols/ctrl"
 us_file="symbols/us"
-custom_file="symbols/custom"
+custom_symbols="symbols/custom"
+custom_types="types/custom"
 evdev="rules/evdev"
 evdevxml="rules/evdev.xml"
 
@@ -41,18 +42,12 @@ kappendconfig5 () {
 ###############
 
 keyboard () {
-    # TODO: make update automatically (rght now, does not update if present)
-    
-    # TODO: write data to basic/evdev files to register layout variant
-    
-    #list-rswap-evdev
-    #list-rswap-evdev-xml
-    #append-if-not-present "$my_dir/xkb/$ctrl_file" "$xkb/$ctrl_file"
-    #append-if-not-present "$my_dir/xkb/$us_file" "$xkb/$us_file"
     
     # move custom layout file into place
-    sudo cp "$my_dir/xkb/$custom_file" "$xkb/$custom_file"
+    sudo cp "$my_dir/xkb/$custom_symbols" "$xkb/$custom_symbols"
+    sudo cp "$my_dir/xkb/$custom_types" "$xkb/$custom_types"
     
+    # TODO: make update automatically (rght now, does not update if present)
     # register options in evdev
     append-if-not-present "$my_dir/xkb/$evdev" "$xkb/$evdev"
     

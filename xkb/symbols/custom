@@ -28,8 +28,11 @@ xkb_symbols "numpad_arrow_tri" {
     key <KP8> { type[Group1]="TWO_LEVEL",
                 [ Up,        KP_Up ]};
     
+    // TODO: change keycodes for numpad? some things don't appear to respect symbols
+    
     key <KP1> { [ KP_1, KP_End ]};
     key <KP2> { [ KP_2, KP_Begin ]};
     key <KP3> { [ KP_3, KP_Next ]};
     
 };
+
