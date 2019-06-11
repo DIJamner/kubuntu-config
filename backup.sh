@@ -16,7 +16,7 @@ run_loc="$(pwd)"
 
 # Preferences
 targets="backup_targets.txt"
-backup_loc="Vaults/Backups"
+backup_loc="/media/dustin/SD_CARD/Backups"
 
 function do-backup () {
     rsync -arRvb --backup-dir="../old" --files-from="$targets" ~ "$backup_loc/current"
