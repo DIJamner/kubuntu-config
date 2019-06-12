@@ -19,7 +19,8 @@ targets="backup_targets.txt"
 backup_loc="/media/dustin/SD_CARD/Backups"
 
 function do-backup () {
-    rsync -arRvb --backup-dir="../old" --files-from="$targets" ~ "$backup_loc/current"
+    date="$(date -Iseconds)"
+    rsync -arRvb --backup-dir="../old-$date" --files-from="$targets" ~ "$backup_loc/current"
 }
 
 cd ~
